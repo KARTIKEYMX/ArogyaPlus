@@ -1,0 +1,9 @@
+{
+  "name": "ArogyaPlus",
+  "description": "Your Trusted Health Companion providing secure access to doctors, diagnostics, and digital health records.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

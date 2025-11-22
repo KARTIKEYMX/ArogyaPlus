@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#00BFA6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="Your Trusted Health Companion providing secure access to doctors, diagnostics, and digital health records." />
+    <title>ArogyaPlus - Trusted Health Companion</title>
+    <link rel="manifest" href="./manifest.json" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'Inter', 'sans-serif'],
+              mono: ['monospace'],
+            },
+            colors: {
+              arogya: {
+                teal: '#00BFA6',
+                navy: '#1A2E4F',
+                dark: '#0F172A',
+                orange: '#FF7043',
+                light: '#F0F9F8',
+                card: '#FFFFFF',
+                text: '#333333',
+                accent: '#00E5FF'
+              }
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'scan': 'scan 3s linear infinite',
+              'ping-slow': 'ping 3s cubic-bezier(0, 0, 0.2, 1) infinite',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'spin-slow': 'spin 8s linear infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              scan: {
+                '0%': { top: '0%', opacity: '0' },
+                '10%': { opacity: '1' },
+                '90%': { opacity: '1' },
+                '100%': { top: '100%', opacity: '0' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 191, 166, 0.3); 
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 191, 166, 0.8); 
+      }
+
+      /* Glassmorphism & Holographic */
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      .glass-dark {
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .card-shadow {
+        box-shadow: 0 15px 35px -5px rgba(26, 46, 79, 0.1);
+      }
+      
+      /* 3D Effects */
+      .preserve-3d {
+        transform-style: preserve-3d;
+      }
+      .perspective-1000 {
+        perspective: 1000px;
+      }
+      .perspective-2000 {
+        perspective: 2000px;
+      }
+      .backface-hidden {
+        backface-visibility: hidden;
+      }
+      .rotate-y-180 {
+        transform: rotateY(180deg);
+      }
+      
+      /* Holographic Layering */
+      .holo-layer {
+        transform: translateZ(20px);
+        transition: transform 0.3s ease;
+      }
+      .holo-layer:hover {
+        transform: translateZ(50px);
+      }
+      .holo-layer-2 {
+        transform: translateZ(40px);
+      }
+      
+      /* Scanning Effect */
+      .scan-line {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00E5FF, transparent);
+        box-shadow: 0 0 10px #00E5FF;
+        z-index: 10;
+      }
+
+      .hologram-grid {
+        background-size: 40px 40px;
+        background-image: linear-gradient(to right, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+      }
+
+      /* AR Camera Effects */
+      .ar-corner {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border: 4px solid #00E5FF;
+        z-index: 20;
+      }
+      .ar-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+      .ar-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+      .ar-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+      .ar-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+      
+      /* Touch optimization */
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.0/client",
+    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-arogya-navy antialiased selection:bg-arogya-teal selection:text-white overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
